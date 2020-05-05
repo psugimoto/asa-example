@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn import datasets, linear_model
@@ -31,10 +30,12 @@ def run_model():
     boston_df = pd.DataFrame(boston.data, columns=FEATURES)
     boston_df["LABELS"] = boston.target
 
-    boston_df = boston_df[boston_df["LABELS"] < 50]
 
     # Data Scientist
     lr = linear_model.LinearRegression()
+
+    boston_df = boston_df[boston_df["LABELS"] < 50]
+
     predicted = cross_val_predict(lr, boston_df[FEATURES], boston_df["LABELS"], cv=10)
     results = mean_absolute_percentage_error(boston_df["LABELS"], predicted)
     return results
